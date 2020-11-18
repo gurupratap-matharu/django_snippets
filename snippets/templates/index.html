@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load snippets_tags %}
 {% block content %}
 <div class="row justify-content-md-center" style="padding-top:20px;">
     <div class="col-md-8">
@@ -12,9 +13,11 @@
                     class="float-right"><small>{{ snippet.user }}</small></a></h5>
             <div class="card-body">
                 <a href="{% url 'language' %}">
-                    <h5 class="card-title">{{ snippet.language }}</h5>
+                    <h5 class="card-title">{{ snippet.language|title }}</h5>
                 </a>
-                <h6 class="card-subtitle mb-2 text-muted">Creado: 1 dia</h6>
+                {% with days=snippet.created|days_since %}
+                <h6 class="card-subtitle mb-2 text-muted">Creado: {{ days }} dia{{ days|pluralize }} </h6>
+                {% endwith %}
                 <p class="card-text">{{ snippet.description }}</p>
                 <hr>
                 <a href="{% url 'snippet' %}" class="btn btn-primary">Ver</a>
