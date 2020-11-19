@@ -20,7 +20,7 @@
                 {% endwith %}
                 <p class="card-text">{{ snippet.description }}</p>
                 <hr>
-                <a href="{% url 'snippet' %}" class="btn btn-primary">Ver</a>
+                <a href="{{ snippet.get_absolute_url }}" class="btn btn-primary">Ver</a>
                 <a href="{% url 'snippet_edit' %}" class="btn btn-info">Editar</a>
                 <a href="{% url 'snippet_delete' %}" class="btn btn-danger">Eliminar</a>
             </div>
