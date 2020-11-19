@@ -12,13 +12,15 @@ class Language(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
 
+    class Meta:
+        ordering = ('-name',)
+
     def __str__(self):
         return self.name
 
 
 class Snippet(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='snippets')
     language = models.ForeignKey(Language, on_delete=models.CASCADE, related_name='snippets')
     name = models.CharField(max_length=255)
