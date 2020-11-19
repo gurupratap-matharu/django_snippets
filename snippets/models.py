@@ -30,4 +30,4 @@ class Snippet(models.Model):
         return f"Snippet {self.name} in {self.language} by {self.user} "
 
     def get_absolute_url(self):
-        return reverse("snippet_detail", args=[self.language.slug, self.name])
+        return reverse("snippet", args=[self.id])
