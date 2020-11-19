@@ -38,3 +38,9 @@ class Snippet(models.Model):
 
     def get_absolute_url(self):
         return reverse("snippet", args=[self.id])
+
+    def get_update_url(self):
+        return reverse('snippet_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('snippet_delete', args=[self.id])
