@@ -15,7 +15,7 @@
         {% with days=snippet.created|days_since %}
         <h6 class="card-subtitle mb-2 text-muted">Creado: {{ days }} dia{{ days|pluralize }} </h6>
         {% endwith %}
-        <p class="card-text">{{ snippet.description }}</p>
+        <p class="card-text">{{ snippet.description|title }}</p>
         <div class="bg-dark p-3 rounded-lg">
 
           <!-- Código del Snippet -->
