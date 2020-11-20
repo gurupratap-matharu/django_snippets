@@ -9,8 +9,11 @@
         {% for snippet in snippet_list %}
         <!-- SNIPPET -->
         <div class="card">
-            <h5 class="card-header">{{ snippet.name|title }}<a href="{% url 'user_snippets' %}"
-                    class="float-right"><small>{{ snippet.user }}</small></a></h5>
+            <h5 class="card-header">{{ snippet.name|title }}
+                <a href="{% url 'user_snippets' %}" class="float-right">
+                    <small>{{ snippet.user }}</small>
+                </a>
+            </h5>
             <div class="card-body">
                 <a href="{% url 'language' %}">
                     <h5 class="card-title">{{ snippet.language|title }}</h5>
