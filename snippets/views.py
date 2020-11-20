@@ -19,9 +19,9 @@ def logout(request):
     return render(request, 'login.html', {})
 
 
-class IndexView(ListView):
+class HomePageView(ListView):
     model = Snippet
-    template_name = 'index.html'
+    template_name = 'home.html'
     context_object_name = 'snippet_list'
     paginate_by = 12
 
@@ -29,7 +29,7 @@ class IndexView(ListView):
 class LanguageView(ListView):
     model = Snippet
     context_object_name = 'snippet_list'
-    template_name = 'index.html'
+    template_name = 'home.html'
     paginate_by = 12
 
     def get_queryset(self):
