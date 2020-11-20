@@ -37,10 +37,10 @@ class Snippet(models.Model):
         return f"Snippet {self.name} in {self.language} by {self.user} "
 
     def get_absolute_url(self):
-        return reverse("snippet", args=[self.id])
+        return reverse('snippet_detail', args=[self.id])
 
     def get_update_url(self):
-        return reverse('snippet_edit', args=[self.id])
+        return reverse('snippet_update', args=[self.id])
 
     def get_delete_url(self):
         return reverse('snippet_delete', args=[self.id])

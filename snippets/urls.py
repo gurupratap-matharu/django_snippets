@@ -8,8 +8,8 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('snippets/python/', views.LanguageView.as_view(), name='language'),
     path('snippets/user/juancito/', views.UserSnippets.as_view(), name='user_snippets'),
-    path('snippets/snippet/<uuid:pk>/', views.SnippetDetailView.as_view(), name='snippet'),
+    path('snippets/<uuid:pk>/', views.SnippetDetailView.as_view(), name='snippet_detail'),
     path('snippets/add/', views.SnippetCreate.as_view(), name='snippet_add'),
-    path('snippets/<uuid:pk>/edit/', views.SnippetUpdate.as_view(), name='snippet_edit'),
+    path('snippets/<uuid:pk>/update/', views.SnippetUpdate.as_view(), name='snippet_update'),
     path('snippets/<uuid:pk>/delete/', views.SnippetDelete.as_view(), name='snippet_delete'),
 ]
