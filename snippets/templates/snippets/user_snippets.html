@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% load snippet_tags %}
+{% load snippets_tags %}
 {% block content %}
 <div class="row justify-content-md-center">
-    <div class="col-md-8">
-        <h1>Snippets: {{ request.user }}</h1>
+    <div class="col-md-8 mt-5">
+        <h3>Snippets: {{ filtered_user }}</h3>
         <br>
 
         {% for snippet in snippet_list %}
         <!-- SNIPPET -->
         <div class="card">
             <h5 class="card-header">{{ snippet.name|title }}
-                <a href="{% url 'user_snippets' %}" class="float-right">
-                    <small>juancito</small>
+                <a href="{% url 'user_snippets' snippet.user.id %}" class="float-right">
+                    <small>{{ snippet.user }}</small>
                 </a>
             </h5>
             <div class="card-body">

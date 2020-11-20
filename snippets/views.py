@@ -1,10 +1,11 @@
 import logging
 
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls.base import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
@@ -47,10 +48,19 @@ class UserSnippets(ListView):
     context_object_name = 'snippet_list'
     template_name = 'snippets/user_snippets.html'
     paginate_by = 12
+    filtered_user = None
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        user_id = self.kwargs.get('user_id')
+        user = get_object_or_404(get_user_model(), id=user_id)
+        self.filtered_user = user
+        logger.info('user: %s user_id: %s', user, user_id)
+        return super().get_queryset().filter(user=user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filtered_user'] = self.filtered_user
+        return context
 
 
 class SnippetDetailView(DetailView):

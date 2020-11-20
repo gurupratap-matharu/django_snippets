@@ -11,7 +11,7 @@
         <!-- SNIPPET -->
         <div class="card">
             <h5 class="card-header">{{ snippet.name|title }}
-                <a href="{% url 'user_snippets' %}" class="float-right">
+                <a href="{% url 'user_snippets' snippet.user.id %}" class="float-right">
                     <small>{{ snippet.user }}</small>
                 </a>
             </h5>
