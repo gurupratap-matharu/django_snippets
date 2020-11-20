@@ -59,10 +59,15 @@ class SnippetDetailView(DetailView):
     template_name = 'snippets/snippet_detail.html'
 
 
-class SnippetCreate(CreateView):
+class SnippetCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Snippet
-    fields = ['name', '']
-    template_name = 'snippets/snippet_add.html'
+    fields = ['name', 'language', 'description', 'snippet', 'public']
+    template_name = 'snippets/snippet_form.html'
+    success_message = "%(name)s successfully created!"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class SnippetUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
