@@ -18,6 +18,7 @@ whitenoise = "*"
 factory-boy = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+django-pygmentify = "*"
 
 [requires]
 python_version = "3.8"
