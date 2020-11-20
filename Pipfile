@@ -15,6 +15,7 @@ django-crispy-forms = "*"
 django-extensions = "*"
 dj-database-url = "*"
 whitenoise = "*"
+factory-boy = "*"
 
 [requires]
 python_version = "3.8"
