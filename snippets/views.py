@@ -58,6 +58,7 @@ class SnippetDetailView(DetailView):
 
 class SnippetCreate(CreateView):
     model = Snippet
+    fields = ['name', '']
     template_name = 'snippets/snippet_add.html'
 
 
