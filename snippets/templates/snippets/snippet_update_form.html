@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load snippets_tags %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <br>
+        <div class="card">
+            <h5 class="card-header">Update</h5>
+            <div class="card-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-light" href="{% url 'home' %}">Cancel</a>
+                        <button class="btn btn-success ml-2">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
