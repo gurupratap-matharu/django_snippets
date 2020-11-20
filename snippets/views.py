@@ -2,6 +2,7 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.shortcuts import render
 from django.urls.base import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
@@ -65,14 +66,30 @@ class SnippetCreate(CreateView):
 
 class SnippetUpdate(UpdateView):
     model = Snippet
-    template_name = 'snippets/snippet_add.html'
+    fields = ['name', 'description', 'language', 'snippet', 'public']
+    template_name = 'snippets/snippet_update_form.html'
+    success_message = "%(name)s successfully updated!"
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if not obj.can_update(self.request.user):
+            logger.warning('Possible attack: \nuser: %s\nobj: %s', self.request.user, obj)
+            raise Http404
+        return obj
 
 
 class SnippetDelete(DeleteView):
     model = Snippet
-    template_name = 'snippets/user_snippets.html'
-    success_url = reverse_lazy('user_snippets')
+    template_name = 'snippets/snippet_confirm_delete.html'
+    success_url = reverse_lazy('home')
     success_message = 'Snippet deleted successfully!'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        if not obj.can_delete(self.request.user):
+            logger.warning('Possible attack: \nuser: %s\nobj: %s', self.request.user, obj)
+            raise Http404
+        return obj
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)

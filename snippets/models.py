@@ -44,3 +44,9 @@ class Snippet(models.Model):
 
     def get_delete_url(self):
         return reverse('snippet_delete', args=[self.id])
+
+    def can_update(self, user):
+        return user.is_superuser or self.user == user
+
+    def can_delete(self, user):
+        return user.is_superuser or self.user == user
