@@ -2,6 +2,7 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404
 from django.shortcuts import render
 from django.urls.base import reverse_lazy
@@ -55,7 +56,7 @@ class UserSnippets(ListView):
 class SnippetDetailView(DetailView):
     model = Snippet
     context_object_name = 'snippet'
-    template_name = 'snippets/snippet.html'
+    template_name = 'snippets/snippet_detail.html'
 
 
 class SnippetCreate(CreateView):
@@ -64,7 +65,7 @@ class SnippetCreate(CreateView):
     template_name = 'snippets/snippet_add.html'
 
 
-class SnippetUpdate(UpdateView):
+class SnippetUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Snippet
     fields = ['name', 'description', 'language', 'snippet', 'public']
     template_name = 'snippets/snippet_update_form.html'
@@ -78,7 +79,7 @@ class SnippetUpdate(UpdateView):
         return obj
 
 
-class SnippetDelete(DeleteView):
+class SnippetDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Snippet
     template_name = 'snippets/snippet_confirm_delete.html'
     success_url = reverse_lazy('home')

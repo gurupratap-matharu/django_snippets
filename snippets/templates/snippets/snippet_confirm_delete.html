@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Delete{% endblock title %}
+{% block content %}
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <br>
+        <div class="card">
+            <h5 class="card-header text-danger">Delete?</h5>
+            <div class="card-body">
+                {{ object }}
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-flex justify-content-end p-2">
+                    <a href="{{ snippet.get_absolute_url }}" class="btn btn-light">Cancel</a>
+                    <button type="submit" class="btn btn-danger ml-3">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
