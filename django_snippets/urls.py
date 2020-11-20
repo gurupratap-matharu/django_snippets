@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('snippets/', include('snippets.urls')),
-    path('admin/', admin.site.urls),
+    # Django administration
+    path('puerta-atras/', admin.site.urls),
+
+    # User Management
+    path('accounts/', include('allauth.urls')),
+    path('', include('snippets.urls')),
 ]
