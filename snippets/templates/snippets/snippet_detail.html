@@ -9,7 +9,7 @@
       <h5 class="card-header">{{ snippet.name|title }}<a href="{% url 'user_snippets' user.id %}"
           class="float-right"><small>{{ snippet.user }}</small></a></h5>
       <div class="card-body">
-        <a href="{% url 'language' %}">
+        <a href="{% url 'language' snippet.language %}">
           <h5 class="card-title">{{ snippet.language|title }}</h5>
         </a>
         {% with days=snippet.created|days_since %}

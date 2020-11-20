@@ -134,10 +134,6 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'default': {
-            'format': '[DJANGO] %(levelname)s %(asctime)s %(module)s '
-            '%(name)s.%(funcName)s:%(lineno)s: %(message)s'
-        },
         'simple': {
             'format': '%(levelname)s %(message)s'
         },
@@ -150,7 +146,12 @@ LOGGING = {
         },
     },
     'loggers': {
-        '*': {
+        'django_snippets': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'snippets': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,

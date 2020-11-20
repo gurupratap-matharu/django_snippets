@@ -37,10 +37,10 @@ class LanguageView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        language = self.request.kwargs['language']
+        language_slug = self.kwargs.get('language_slug')
+        language = get_object_or_404(Language, slug=language_slug)
         logger.info('language: %s', language)
-        return queryset.filter(language=language)
+        return super().get_queryset().filter(language=language)
 
 
 class UserSnippets(ListView):
