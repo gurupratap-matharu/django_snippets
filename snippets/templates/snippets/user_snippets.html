@@ -24,8 +24,10 @@
                 <p class="card-text">{{ snippet.description }}</p>
                 <hr>
                 <a href="{{ snippet.get_absolute_url }}" class="btn btn-primary">Ver</a>
+                {% if user == filtered_user %}
                 <a href="{{ snippet.get_update_url }}" class="btn btn-info">Editar</a>
                 <a href="{{ snippet.get_delete_url }}" class="btn btn-danger">Eliminar</a>
+                {% endif %}
             </div>
         </div>
         <br>

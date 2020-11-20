@@ -28,8 +28,10 @@
         </div>
         <hr>
         <br>
+        {% if user == snippet.user %}
         <a href="{{ snippet.get_update_url }}" class="btn btn-info">Editar</a>
         <a href="{{ snippet.get_delete_url }}" class="btn btn-danger">Eliminar</a>
+        {% endif %}
       </div>
     </div>
   </div>

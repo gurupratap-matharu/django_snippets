@@ -21,6 +21,9 @@ class HomePageView(ListView):
     context_object_name = 'snippet_list'
     paginate_by = 12
 
+    def get_queryset(self):
+        return super().get_queryset().filter(public=True)
+
 
 class LanguageView(ListView):
     model = Snippet
@@ -32,7 +35,7 @@ class LanguageView(ListView):
         language_slug = self.kwargs.get('language_slug')
         language = get_object_or_404(Language, slug=language_slug)
         logger.info('language: %s', language)
-        return super().get_queryset().filter(language=language)
+        return super().get_queryset().filter(language=language).filter(public=True)
 
 
 class UserSnippets(ListView):
@@ -47,7 +50,11 @@ class UserSnippets(ListView):
         user = get_object_or_404(get_user_model(), id=user_id)
         self.filtered_user = user
         logger.info('user: %s user_id: %s', user, user_id)
-        return super().get_queryset().filter(user=user)
+        queryset = super().get_queryset().filter(user=user)
+
+        if user != self.request.user:
+            queryset = queryset.filter(public=True)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
