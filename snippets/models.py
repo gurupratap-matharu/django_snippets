@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import uuid
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
@@ -21,7 +21,7 @@ class Language(models.Model):
 
 class Snippet(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='snippets')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='snippets')
     language = models.ForeignKey(Language, on_delete=models.CASCADE, related_name='snippets')
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
