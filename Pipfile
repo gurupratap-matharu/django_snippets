@@ -16,6 +16,8 @@ django-extensions = "*"
 dj-database-url = "*"
 whitenoise = "*"
 factory-boy = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"
