@@ -4,8 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.HomePageView.as_view(), name='home'),
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout'),
     path('snippets/user/<int:user_id>/', views.UserSnippets.as_view(), name='user_snippets'),
     path('snippets/<uuid:pk>/', views.SnippetDetailView.as_view(), name='snippet_detail'),
     path('snippets/add/', views.SnippetCreate.as_view(), name='snippet_add'),
