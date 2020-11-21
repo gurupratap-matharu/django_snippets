@@ -10,6 +10,7 @@ from django.urls.base import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
+from snippets.forms import SnippetForm
 from snippets.models import Language, Snippet
 
 logger = logging.getLogger(__name__)
@@ -70,12 +71,13 @@ class SnippetDetailView(DetailView):
 
 class SnippetCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Snippet
-    fields = ['name', 'language', 'description', 'snippet', 'public']
+    form_class = SnippetForm
     template_name = 'snippets/snippet_form.html'
     success_message = "%(name)s successfully created!"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.send_mail(email=self.request.user.email)
         return super().form_valid(form)
 
 
