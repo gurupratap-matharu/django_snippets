@@ -22,3 +22,4 @@ class SnippetFactory(factory.django.DjangoModelFactory):
     description = factory.Faker('paragraph')
     snippet = factory.Faker('random_element', elements=SNIPPETS)
     public = factory.Faker('boolean')
+    created = factory.Faker('date_time_this_year')
