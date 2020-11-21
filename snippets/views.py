@@ -12,6 +12,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 
 from snippets.forms import SnippetForm
 from snippets.models import Language, Snippet
+from snippets.tasks import send_snippet_creation_mail
 
 logger = logging.getLogger(__name__)
 
@@ -77,7 +78,12 @@ class SnippetCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        subject, message, user_email = form.instance.name, form.instance.description, self.request.user.email
+        logger.info('sending snippet creation email...')
+        # send default django email
         form.send_mail()
+        # send email with celery
+        send_snippet_creation_mail(subject=subject, message=message, user_email=user_email)
         return super().form_valid(form)
 
 
