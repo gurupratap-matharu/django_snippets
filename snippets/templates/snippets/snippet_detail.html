@@ -16,10 +16,10 @@
         <h6 class="card-subtitle mb-2 text-muted">Creado: {{ days }} dia{{ days|pluralize }} </h6>
         {% endwith %}
         <p class="card-text">{{ snippet.description|title }}</p>
-        <div class="bg-dark p-3 rounded-lg">
+        <div class="bg-light p-3 rounded-lg">
 
           <!-- Código del Snippet -->
-          {% pygmentify 'monokai' %}
+          {% pygmentify %}
           <pre class="{{ snippet.language }}">
             {{ snippet.snippet }}
           </pre>
