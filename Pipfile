@@ -19,6 +19,7 @@ factory-boy = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 django-pygmentify = "*"
+celery = "*"
 
 [requires]
 python_version = "3.8"
