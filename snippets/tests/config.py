@@ -1,5 +1,5 @@
 LANGUAGES = ['python', 'javascript', 'rust', 'c', 'haskell',
-             'R', 'go', 'typescript', 'ruby', 'c#', 'bash', 'perl', 'php']
+             'R', 'go', 'typescript', 'ruby', 'bash', 'perl', 'php']
 SNIPPETS = [
     """
     class ChoiceProvider(BaseProvider):
