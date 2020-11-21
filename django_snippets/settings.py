@@ -200,8 +200,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'admin@sitedomain.com'
 RECIPIENT_LIST = ['gurupratap.matharu@gmail.com']
 
+# django-extensions
+SHELL_PLUS_IMPORTS = [
+    'from snippets.tests.factories import LanguageFactory, SnippetFactory',
+    'from users.factories import UserFactory',
+]
 if not DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     EMAIL_HOST = 'smtp.gmail.com'
