@@ -77,7 +77,7 @@ class SnippetCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.send_mail(email=self.request.user.email)
+        form.send_mail()
         return super().form_valid(form)
 
 

@@ -17,9 +17,12 @@ class SnippetForm(forms.ModelForm):
         }
 
     def send_mail(self, **kwargs):
-        user_email = kwargs.get('email')
+        user_email = self.instance.user.email
+        logger.info('Name: %s', self.instance.name)
+        logger.info('Description: %s', self.instance.description)
         logger.info('sending snippet creation email to %s...', user_email)
-        message = "Thank you for creating a snippet."
-        send_mail(subject='Site message', message=message, from_email='site@domain.com',
+        subject, message = self.instance.name, self.instance.description
+        send_mail(subject=subject, message=message,
+                  from_email='site@domain.com',
                   recipient_list=['gurupratap.matharu@gmail.com', user_email],
                   fail_silently=False)
